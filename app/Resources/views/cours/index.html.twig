@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Cours list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Adresse</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Duration</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cour in cours %}
+            <tr>
+                <td><a href="{{ path('cours_show', { 'id': cour.id }) }}">{{ cour.id }}</a></td>
+                <td>{{ cour.adresse }}</td>
+                <td>{% if cour.date %}{{ cour.date|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if cour.time %}{{ cour.time|date('H:i:s') }}{% endif %}</td>
+                <td>{{ cour.duration }}</td>
+                <td>{{ cour.status }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('cours_show', { 'id': cour.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('cours_edit', { 'id': cour.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('cours_new') }}">Create a new cour</a>
+        </li>
+    </ul>
+{% endblock %}
